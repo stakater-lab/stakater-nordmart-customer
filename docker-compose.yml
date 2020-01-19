@@ -1,0 +1,21 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      args:
+        JAR_FILE: /customer-0.0.1-SNAPSHOT.jar
+    ports:
+      - "8080:8080"
+    restart: always
+    container_name: customer
+    networks:
+      - nordmart-apps
+  cassandra:
+    image: "cassandra"
+    container_name: cassandra
+    networks:
+      - nordmart-apps
+networks:
+  nordmart-apps:
+    external: true

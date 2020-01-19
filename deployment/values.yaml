@@ -1,0 +1,22 @@
+applicationName: "customer"
+deployment:
+  podLabels:
+    app: customer
+  image:
+    repository: docker.release.stakater.com:443/stakater/customer
+    tag: v0.0.1
+  env:
+  - name: KEYCLOAK_REALM
+    value: "nordmart"
+  - name: KEYCLOAK_URL
+    value: "http://192.168.99.100:8180/auth/"
+  - name: KEYCLOAK_CLIENT_BACKEND
+    value: "stakater-nordmart-backend"
+  - name: KEYCLOAK_CLIENT_SECRET_KEY
+    value: "7672aea2-81ff-4aa2-affe-daf3bad10334"
+  imagePullSecrets: "docker-registry-nexus-secret"
+rbac:
+  create: false
+  serviceAccount:
+    name: default
+configMap: {}
