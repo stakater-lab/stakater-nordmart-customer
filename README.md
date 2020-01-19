@@ -37,11 +37,7 @@ To deploy app inside a docker container
   mvn clean package
   ```
 
-* Next build the image using
-
-  ```bash
-  docker build -t customer .
-  ```
+* Next configure env variable in .env file
 
 * Finally run the customer and cassandra image with docker compose
 
