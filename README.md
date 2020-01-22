@@ -78,10 +78,12 @@ To deploy app inside a docker container
   mvn clean package
   ```
 
-* Next configure env variable in .env file
-
 * Finally run the customer and cassandra image with docker compose
 
   ```bash
+  KEYCLOAK_REALM="nordmart" \
+  KEYCLOAK_URL="https://keycloak-security.DOMAIN:8180/auth/" \
+  KEYCLOAK_CLIENT_BACKEND="stakater-nordmart-backend" \
+  KEYCLOAK_CLIENT_SECRET_KEY="<concealed>" \
   docker-compose up
   ```
