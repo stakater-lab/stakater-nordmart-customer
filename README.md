@@ -22,7 +22,7 @@ It requires following things to be installed:
 
 ## APIs
 
-- `POST /micro/customers`
+- `POST /api/customers`
     - Create a customer. 
         - Return the saved customer.  The caller of this API must pass a valid OAuth token
     - Request body :
@@ -35,7 +35,7 @@ It requires following things to be installed:
           "phoneNumber": "147-852-5789"
         }`
         
-- `PUT /micro/customers/:customerId`
+- `PUT /api/customers/:customerId`
     - Update a customer. - Return the updated customer.  The caller of this API must pass a valid OAuth token
     - Request body :
         ```
@@ -47,12 +47,14 @@ It requires following things to be installed:
           "phoneNumber": "147-852-5789"
         }`
         
-- `GET /micro/customers`
+- `GET /api/customers`
     - Return all customers. The caller of this API must pass a valid OAuth token
     
-- `GET /micro/customers/search`
+- `GET /api/customers/search`
     - Search customer by email. The caller of this API must pass a valid OAuth token
 
+- `GET /actuator/health`
+    - Health check.
 
 ### Local deployment
 
