@@ -492,18 +492,18 @@
     {
       "id": "d2c95900-9fa3-4613-b41c-687db71d90f6",
       "clientId": "stakater-nordmart-web",
-      "rootUrl": "https://web-dev.nordmart-eks.stakater.com/",
-      "adminUrl": "https://web-dev.nordmart-eks.stakater.com/",
+      "rootUrl": "http://web-dev.DOMAIN/",
+      "adminUrl": "http://web-dev.DOMAIN/",
       "baseUrl": "",
       "surrogateAuthRequired": false,
       "enabled": true,
       "clientAuthenticatorType": "client-secret",
       "secret": "**********",
       "redirectUris": [
-        "https://web-dev.nordmart-eks.stakater.com/*"
+        "http://web-dev.DOMAIN/*"
       ],
       "webOrigins": [
-        "https://web-dev.nordmart-eks.stakater.com"
+        "http://web-dev.DOMAIN"
       ],
       "notBefore": 0,
       "bearerOnly": false,

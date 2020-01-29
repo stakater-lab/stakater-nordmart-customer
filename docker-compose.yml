@@ -5,6 +5,11 @@ services:
       context: .
       args:
         JAR_FILE: /customer-0.0.1-SNAPSHOT.jar
+    environment:
+      KEYCLOAK_REALM: ${KEYCLOAK_REALM}
+      KEYCLOAK_URL: ${KEYCLOAK_URL}
+      KEYCLOAK_CLIENT_BACKEND: ${KEYCLOAK_CLIENT_BACKEND}
+      KEYCLOAK_CLIENT_SECRET_KEY: ${KEYCLOAK_CLIENT_SECRET_KEY}
     ports:
       - "8080:8080"
     restart: always

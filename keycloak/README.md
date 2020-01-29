@@ -24,6 +24,8 @@ Pull the keycloak image within the following docker command :
 docker pull jboss/keycloak
 ```
 
+Replace `web-dev.DOMAIN` in the configuration file `realm-config.json` with the client web application domain.
+
 To run keycloak, execute the following command : 
 
 ```bash
