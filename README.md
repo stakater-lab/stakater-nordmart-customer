@@ -13,6 +13,28 @@ Here is an overview of the project's features:
 - Uses Cassandra as the customer database.
 - Uses Docker to package application binary and its dependencies.
 
+## User scenarios
+
+**Customer profile operations**
+
+Customer service provide operations to create, update, search customer profile: 
+* Create - Customer profile can be created via nordmart web application.
+* Update - Customer profile can be updated via nordmart web application.
+* Search - Customer profile can be searched via nordmart web application.
+
+## Configurations
+
+Environment variables can be provided to configure the customer service.
+
+**Keycloak configurations**
+* KEYCLOAK_REALM - Keycloak realm name.
+* KEYCLOAK_URL - Keycloak authentication URL.
+* KEYCLOAK_CLIENT_BACKEND - Keycloak client for backend token based authentication.
+* KEYCLOAK_CLIENT_SECRET_KEY - Keycloak secret key for accessing the keycloak client backend.
+
+**Keycloak configurations**
+* CASSANDRA_HOST - Host database configuration.
+
 ## Dependencies
 
 It requires following things to be installed:
