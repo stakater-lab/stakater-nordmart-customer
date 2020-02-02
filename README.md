@@ -32,7 +32,7 @@ Environment variables can be provided to configure the customer service.
 * KEYCLOAK_CLIENT_BACKEND - Keycloak client for backend token based authentication.
 * KEYCLOAK_CLIENT_SECRET_KEY - Keycloak secret key for accessing the keycloak client backend.
 
-**Keycloak configurations**
+**Cassandra configuration configurations**
 * CASSANDRA_HOST - Host database configuration.
 
 ## Dependencies
