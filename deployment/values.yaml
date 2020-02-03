@@ -6,6 +6,10 @@ deployment:
     repository: docker.release.stakater.com:443/stakater/customer
     tag: v0.0.1
   env:
+  - name: CATALOG_ENDPOINT
+    value: "catalog.nordmart-dev-apps.svc.cluster.local:8080"
+  - name: CASSANDRA_HOST
+    value: "cassandra.nordmart-dev-apps.svc.cluster.local"
   - name: KEYCLOAK_REALM
     value: "nordmart"
   - name: KEYCLOAK_URL
