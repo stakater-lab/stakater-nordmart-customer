@@ -18,8 +18,6 @@ deployment:
     value: "stakater-nordmart-backend"
   - name: KEYCLOAK_CLIENT_SECRET_KEY
     value: "<concealed>"
-  - name: CASSANDRA_HOST
-    value: "cassandra"
   imagePullSecrets: "docker-registry-nexus-secret"
 rbac:
   create: false
