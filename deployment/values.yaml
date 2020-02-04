@@ -1,0 +1,26 @@
+applicationName: "customer"
+deployment:
+  podLabels:
+    app: customer
+  image:
+    repository: docker.release.stakater.com:443/stakater/customer
+    tag: v0.0.1
+  env:
+  - name: CATALOG_ENDPOINT
+    value: "catalog.nordmart-dev-apps.svc.cluster.local:8080"
+  - name: CASSANDRA_HOST
+    value: "cassandra.nordmart-dev-apps.svc.cluster.local"
+  - name: KEYCLOAK_REALM
+    value: "nordmart"
+  - name: KEYCLOAK_URL
+    value: "https://keycloak-security.DOMAIN:8180/auth/"
+  - name: KEYCLOAK_CLIENT_BACKEND
+    value: "stakater-nordmart-backend"
+  - name: KEYCLOAK_CLIENT_SECRET_KEY
+    value: "<concealed>"
+  imagePullSecrets: "docker-registry-nexus-secret"
+rbac:
+  create: false
+  serviceAccount:
+    name: default
+configMap: {}
