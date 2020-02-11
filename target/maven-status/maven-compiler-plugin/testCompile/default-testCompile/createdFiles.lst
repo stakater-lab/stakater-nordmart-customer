@@ -1,0 +1,4 @@
+com/stakater/nordmart/customer/service/CustomerServiceUnitTest.class
+com/stakater/nordmart/customer/config/TestCassandraConfig.class
+com/stakater/nordmart/customer/provider/CustomersProvider.class
+com/stakater/nordmart/customer/service/CustomerServiceIntegrationTest.class
