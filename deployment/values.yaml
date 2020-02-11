@@ -9,13 +9,13 @@ deployment:
   volumes: {}
   env:
   - name: CATALOG_ENDPOINT
-    value: "catalog.default.svc.cluster.local:8080"
+    value: "catalog:8080"
   - name: CASSANDRA_HOST
-    value: "cassandra.default.svc.cluster.local"
+    value: "cassandra"
   - name: KEYCLOAK_REALM
     value: "nordmart"
   - name: KEYCLOAK_URL
-    value: "https://keycloak-dev.nordmart-eks.stakater.com/auth/"
+    value: "https://keycloak-dev.DOMAIN/auth/"
   - name: KEYCLOAK_CLIENT_BACKEND
     value: "stakater-nordmart-backend"
   - name: KEYCLOAK_CLIENT_SECRET_KEY
