@@ -18,5 +18,7 @@ spec:
     app: customer
     
   ports:
-    []
+    - name: https
+      port: 8080
+      targetPort: 8080
     

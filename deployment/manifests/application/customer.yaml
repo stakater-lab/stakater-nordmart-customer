@@ -1,4 +1,19 @@
 ---
+# Source: application/templates/serviceaccount.yaml
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: customer
+    group: com.stakater.platform
+    provider: stakater
+    version: "1.0.0"
+    chart: "application-0.0.12"
+    release: "RELEASE-NAME"
+    heritage: "Tiller"
+  name: customer
+---
 # Source: application/templates/service.yaml
 
 apiVersion: v1
@@ -18,7 +33,9 @@ spec:
     app: customer
     
   ports:
-    []
+    - name: https
+      port: 8080
+      targetPort: 8080
     
 ---
 # Source: application/templates/deployment.yaml
@@ -34,9 +51,6 @@ metadata:
     chart: "application-0.0.12"
     release: "RELEASE-NAME"
     heritage: "Tiller"
-  annotations:
-    reloader.stakater.com/auto: "true"
-    
   name: customer
 spec:
   replicas: 1
@@ -52,28 +66,47 @@ spec:
         heritage: "Tiller"
         app: customer
         
-    spec:      
-      imagePullSecrets:
-      - name: docker-registry-nexus-secret
+    spec:
       containers:
       - name: customer
-        image: "docker.release.stakater.com:443/stakater/customer:v0.0.1"
+        image: "stakater/customer:v0.0.1"
         imagePullPolicy: IfNotPresent
         env:
           - name: CATALOG_ENDPOINT
-            value: catalog.nordmart-dev-apps.svc.cluster.local:8080
+            value: catalog:8080
           - name: CASSANDRA_HOST
-            value: cassandra.nordmart-dev-apps.svc.cluster.local
+            value: cassandra
           - name: KEYCLOAK_REALM
             value: nordmart
           - name: KEYCLOAK_URL
-            value: https://keycloak-security.DOMAIN:8180/auth/
+            value: https://keycloak-dev.DOMAIN/auth/
           - name: KEYCLOAK_CLIENT_BACKEND
             value: stakater-nordmart-backend
           - name: KEYCLOAK_CLIENT_SECRET_KEY
-            value: <concealed>
+            value: 7672aea2-81ff-4aa2-affe-daf3bad10334
+          - name: JAEGER_ENDPOINT
+            value: http://jaeger-collector.istio-system:14268/api/traces
           
-      serviceAccountName: default        
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        
+      serviceAccountName: customer        
 ---
 # Source: application/templates/clusterrole.yaml
 
@@ -100,7 +133,4 @@ spec:
 
 ---
 # Source: application/templates/secret.yaml
-
----
-# Source: application/templates/serviceaccount.yaml
 
