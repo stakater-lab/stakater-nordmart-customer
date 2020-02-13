@@ -4,7 +4,7 @@ deployment:
   podLabels:
     app: customer
   image:
-    repository: stakater/customer
+    repository: stakater/stakater-nordmart-customer
     tag: v0.0.1
   volumes: {}
   env:
