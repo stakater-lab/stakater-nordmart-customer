@@ -1,5 +1,7 @@
 applicationName: "customer"
 deployment:
+  additionalLabels:
+    appCategory: "backend"
   annotations:
   podLabels:
     app: customer
