@@ -34,13 +34,20 @@ Environment variables can be provided to configure the customer service.
 
 **Cassandra configuration**
 * CASSANDRA_HOST - Host database configuration.
+* CASSANDRA_USERNAME - User name to connect with Cassandra
+* CASSANDRA_PASSWORD - Password to connect with Cassandra
 
 ## Dependencies
 
 It requires following things to be installed:
-
 * Java: ^8.0
+* Maven: ^3.x
+
+### Direct
 * Cassandra DB
+
+### Shared
+* KeyCloak
 
 ## APIs
 
@@ -105,9 +112,12 @@ To deploy app inside a docker container
 * Finally run the customer and cassandra image with docker compose
 
   ```bash
-  KEYCLOAK_REALM=nordmart \
-  KEYCLOAK_URL=https://keycloak-security.DOMAIN:8180/auth/ \
-  KEYCLOAK_CLIENT_BACKEND=stakater-nordmart-backend \
-  KEYCLOAK_CLIENT_SECRET_KEY=<concealed> \
-  docker-compose up
+    KEYCLOAK_REALM=nordmart \
+    KEYCLOAK_URL=https://keycloak-security.DOMAIN:8180/auth/ \
+    KEYCLOAK_CLIENT_BACKEND=stakater-nordmart-backend \
+    KEYCLOAK_CLIENT_SECRET_KEY=7672aea2-81ff-4aa2-affe-daf3bad10334 \
+    CASSANDRA_HOST=cassandra \
+    CASSANDRA_USERNAME=cassandra \
+    CASSANDRA_PASSWORD=cassandra \
+    docker-compose up
   ```

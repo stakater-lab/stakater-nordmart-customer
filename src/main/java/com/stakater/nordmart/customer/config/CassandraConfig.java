@@ -1,6 +1,7 @@
 package com.stakater.nordmart.customer.config;
 
-
+import com.datastax.driver.core.AuthProvider;
+import com.datastax.driver.core.PlainTextAuthProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.cassandra.config.AbstractCassandraConfiguration;
@@ -29,6 +30,12 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
     @Value("${nordmart.domain.package}")
     private String basePackage;
 
+    @Value("${spring.data.cassandra.username:placeholder}")
+    private String username;
+
+    @Value("${spring.data.cassandra.password:placeholder}")
+    private String password;
+
     @Override
     protected String getContactPoints() {
         return contactPoints;
@@ -42,6 +49,11 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
     @Override
     protected String getKeyspaceName() {
         return this.keySpace;
+    }
+
+    @Override
+    protected AuthProvider getAuthProvider() {
+        return new PlainTextAuthProvider(username, password);
     }
 
     @Override
