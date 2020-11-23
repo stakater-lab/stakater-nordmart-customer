@@ -5,8 +5,7 @@ application:
     additionalLabels:
       appCategory: "backend"
     annotations:
-    podLabels:
-      app: customer
+    imagePullSecrets: nexus-creds 
     image:
       repository: stakater/stakater-nordmart-customer
       tag: v0.0.1
@@ -19,7 +18,11 @@ application:
     - name: CASSANDRA_USERNAME
       value: "cassandra"
     - name: CASSANDRA_PASSWORD
-      value: "cassandra"
+      valueFrom:
+        secretKeyRef:
+          name: cassandra 
+          key: cassandra-password
+
     - name: KEYCLOAK_REALM
       value: "nordmart"
     - name: KEYCLOAK_URL
@@ -61,7 +64,6 @@ application:
       enabled: true
   configMap:
     enabled: false
-# https://github.com/bitnami/charts/tree/master/bitnami/cassandra
 cassandra:
   fullnameOverride: cassandra
   jvm:
