@@ -33,6 +33,13 @@ application:
       value: "7672aea2-81ff-4aa2-affe-daf3bad10334"
     - name: JAEGER_ENDPOINT
       value: "http://jaeger-collector.istio-system:14268/api/traces"
+    resources: 
+      limits:
+        memory: 1Gi 
+        cpu: 0.5
+      requests:
+        memory: 128Mi
+        cpu: 0.1  
     probes:
       readinessProbe:
         failureThreshold: 3
