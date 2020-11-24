@@ -1,0 +1,91 @@
+
+application:
+  applicationName: "customer"
+  deployment:
+    additionalLabels:
+      appCategory: "backend"
+    annotations:
+    imagePullSecrets: nexus-creds 
+    image:
+      repository: stakater/stakater-nordmart-customer
+      tag: v0.0.1
+    volumes: {}
+    env:
+    - name: CATALOG_ENDPOINT
+      value: "catalog:8080"
+    - name: CASSANDRA_HOST
+      value: "cassandra"
+    - name: CASSANDRA_USERNAME
+      value: "cassandra"
+    - name: CASSANDRA_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: cassandra 
+          key: cassandra-password
+
+    - name: KEYCLOAK_REALM
+      value: "nordmart"
+    - name: KEYCLOAK_URL
+      value: "https://iam-keycloak-nordmart-dev.apps.binero.06p407u4.kubeapp.cloud/auth/"
+    - name: KEYCLOAK_CLIENT_BACKEND
+      value: "stakater-nordmart-backend"
+    - name: KEYCLOAK_CLIENT_SECRET_KEY
+      value: "7672aea2-81ff-4aa2-affe-daf3bad10334"
+    - name: JAEGER_ENDPOINT
+      value: "http://jaeger-collector.istio-system:14268/api/traces"
+    resources: 
+      limits:
+        memory: 1Gi 
+        cpu: 0.5
+      requests:
+        memory: 128Mi
+        cpu: 0.1  
+    probes:
+      readinessProbe:
+        failureThreshold: 3
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+        initialDelaySeconds: 10
+        httpGet:
+          path: /actuator/health
+          port: 8080
+      livenessProbe:
+        failureThreshold: 3
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 1
+        initialDelaySeconds: 10
+        httpGet:
+          path: /actuator/health
+          port: 8080
+  service:
+    ports:
+    - port: 8080
+      name: https
+      targetPort: 8080
+  rbac:
+    create: true
+    serviceAccount:
+      create: true
+      enabled: true
+  configMap:
+    enabled: false
+cassandra:
+  fullnameOverride: cassandra
+  jvm:
+    maxHeapSize: 512M
+    newHeapSize: 512M
+  dbUser:
+    user: cassandra
+    password: cassandra
+  cluster:
+    name: cassandra
+    endpointSnitch: GossipingPropertyFileSnitch
+  podSecurityContext:
+    enabled: false
+  containerSecurityContext:
+    enabled: false
+
+  
+  
