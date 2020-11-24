@@ -1,3 +1,7 @@
 .idea/
 customer.iml
 target/
+# Chart dependencies
+**/charts/*.tgz
+
+.history
