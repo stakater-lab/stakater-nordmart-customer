@@ -68,8 +68,6 @@ application:
     serviceAccount:
       create: true
       enabled: true
-  configMap:
-    enabled: false
 cassandra:
   fullnameOverride: cassandra
   jvm:
