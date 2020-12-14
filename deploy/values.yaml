@@ -1,7 +1,23 @@
 
 application:
   applicationName: "customer"
+  configMap:
+    enabled: true
+    files:
+    - nameSuffix: ""
+      data:
+        KEYCLOAK_REALM: "nordmart"
+        KEYCLOAK_URL:  "https://iam-keycloak-nordmart-dev.apps.binero.06p407u4.kubeapp.cloud/auth/"
+        KEYCLOAK_CLIENT_BACKEND: "stakater-nordmart-backend"
+        KEYCLOAK_CLIENT_SECRET_KEY: "7672aea2-81ff-4aa2-affe-daf3bad10334"
+        JAEGER_ENDPOINT: "http://jaeger-collector.istio-system:14268/api/traces"
+        CATALOG_ENDPOINT: "catalog:8080"
+        CASSANDRA_HOST: "cassandra"
+        CASSANDRA_USERNAME: "cassandra"
   deployment:
+    envFrom:
+    - type: configmap
+      name: ""
     additionalLabels:
       appCategory: "backend"
     annotations:
@@ -11,28 +27,11 @@ application:
       tag: v0.0.1
     volumes: {}
     env:
-    - name: CATALOG_ENDPOINT
-      value: "catalog:8080"
-    - name: CASSANDRA_HOST
-      value: "cassandra"
-    - name: CASSANDRA_USERNAME
-      value: "cassandra"
     - name: CASSANDRA_PASSWORD
       valueFrom:
         secretKeyRef:
           name: cassandra 
           key: cassandra-password
-
-    - name: KEYCLOAK_REALM
-      value: "nordmart"
-    - name: KEYCLOAK_URL
-      value: "https://iam-keycloak-nordmart-dev.apps.binero.06p407u4.kubeapp.cloud/auth/"
-    - name: KEYCLOAK_CLIENT_BACKEND
-      value: "stakater-nordmart-backend"
-    - name: KEYCLOAK_CLIENT_SECRET_KEY
-      value: "7672aea2-81ff-4aa2-affe-daf3bad10334"
-    - name: JAEGER_ENDPOINT
-      value: "http://jaeger-collector.istio-system:14268/api/traces"
     resources: 
       limits:
         memory: 1Gi 
