@@ -1,9 +1,0 @@
-dependencies:
-- name: application
-  repository: https://stakater.github.io/stakater-charts
-  version: 0.0.29
-- name: cassandra
-  repository: https://charts.bitnami.com/bitnami
-  version: 7.0.1
-digest: sha256:7993ed8ff62c1d8d1f95a3a09cca5ba77c66d8e8395fc2d2fbe8e87bb7ffb9dc
-generated: "2020-11-20T17:19:25.782521217+05:00"
